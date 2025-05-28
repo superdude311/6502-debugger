@@ -42,29 +42,29 @@ int main() {
     SystemInit();
     funGpioInitAll(); // Enable GPIOs
 
-    funDigitalWrite(BUS_ENABLE, FUN_LOW); // Set BUS_ENABLE to low
-    pin_init(); // Initialize extended databus pins
-    
-    int testaddr = 0x1234; // Example address to write
-    write_addressbus(testaddr); // Write the address to the address bus
+    funDigitalWrite(BUS_ENABLE, FUN_LOW); // set BUS_ENABLE to low
+    pin_init(); // initialize extended databus pins
+
+    int testaddr = 0x1234; // test address to write
+    write_addressbus(testaddr); // write  the address to the address bus
 }
 
-void pin_init() {
+void pin_init() { // initializes extended databus GPIO pins
     for (int i = 16; i <= 24; i++) {
         int port_a_ext = GPIOA->CFGXR;
         port_a_ext |= 1 << ((i - 16) * 4); // Set PA16 to PA24 as outputs
     }
 }
 
-int read_databus() {
+int read_databus() { // reads the data bus (PC15, PA8 to PA14)
     int port_a = GPIOA->INDR;
     int port_c = GPIOC->INDR;
-    int c_mask = 0x8000; // Mask for PC15 (D0)
-    int a_mask = 0x1FC00; // Mask for PA8 to PA14 (D1 to D7)
-    int databus_val = 0; // Initialize the data bus value
+    int c_mask = 0x8000; // mask for PC15 (D0)
+    int a_mask = 0x1FC00; // mask for PA8 to PA14 (D1 to D7)
+    int databus_val = 0; // initialize the data bus value
 
-    databus_val = ((port_c & c_mask) >> 15) | ((port_a & a_mask) >> 7); // Combine the values from port A and port C
-    return databus_val; // Return the combined data from the data bus
+    databus_val = ((port_c & c_mask) >> 15) | ((port_a & a_mask) >> 7); // combine the values from masked port A and port C
+    return databus_val; // return the combined data from the data bus
 }
 
 void write_addressbus(int address) {
