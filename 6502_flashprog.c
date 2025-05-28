@@ -2,6 +2,7 @@
 // Created by Matthew Kibarian 
 // Date: 2025-05-27/28
 
+#include "funconfig.h" // Include the configuration header for CH32X035
 #include "ch32fun.h"
 #include <stdio.h>
 
