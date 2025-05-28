@@ -2,7 +2,6 @@
 // Created by Matthew Kibarian 
 // Date: 2025-05-27/28
 
-#define CH32X03x
 #include "ch32fun.h"
 #include <stdio.h>
 
