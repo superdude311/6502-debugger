@@ -252,7 +252,7 @@ static inline uint32_t __get_MTVAL(void)
 		RCC->CFGR0 = RCC_HPRE_DIV1;                               	// PLLCLK = HCLK = SYSCLK = APB1
  212:	0007a223          	sw	zero,4(a5) # 40021004 <_eusrstack+0x2001c004>
 		RCC->CTLR  = BASE_CTLR | RCC_HSION;     					// Use HSI, Only.
- 216:	08170713          	addi	a4,a4,129 # 80081 <g6502_flashprog.c.a4e91263+0x7e09d>
+ 216:	08170713          	addi	a4,a4,129 # 80081 <g6502_flashprog.c.a5ca433c+0x7e09d>
  21a:	c398                	sw	a4,0(a5)
 		FLASH->ACTLR = FLASH_ACTLR_LATENCY_1;       		// +1 Cycle Latency
 	#endif
@@ -311,7 +311,7 @@ void pin_init() { // initializes extended databus GPIO pins
  25a:	80078793          	addi	a5,a5,-2048 # 40010800 <_eusrstack+0x2000b800>
  25e:	4fd4                	lw	a3,28(a5)
     for (int i = 16; i <= 24; i++) {
- 260:	177d                	addi	a4,a4,-1 # fffffff <g6502_flashprog.c.a4e91263+0xfffe01b>
+ 260:	177d                	addi	a4,a4,-1 # fffffff <g6502_flashprog.c.a5ca433c+0xfffe01b>
  262:	ff75                	bnez	a4,25e <main+0x2a>
     return databus_val; // return the combined data from the data bus
 }
@@ -321,7 +321,7 @@ void write_addressbus(int address) {
     GPIOA->OUTDR = (GPIOA->OUTDR & 0xF803FF) | flipped_addr; // set only the address bits in the GPIOA output data register
  264:	47d8                	lw	a4,12(a5)
  266:	00f806b7          	lui	a3,0xf80
- 26a:	3ff68693          	addi	a3,a3,1023 # f803ff <g6502_flashprog.c.a4e91263+0xf7e41b>
+ 26a:	3ff68693          	addi	a3,a3,1023 # f803ff <g6502_flashprog.c.a5ca433c+0xf7e41b>
 }
  26e:	40b2                	lw	ra,12(sp)
     GPIOA->OUTDR = (GPIOA->OUTDR & 0xF803FF) | flipped_addr; // set only the address bits in the GPIOA output data register
