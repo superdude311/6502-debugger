@@ -43,7 +43,8 @@ int main() {
     funGpioInitAll(); // Enable GPIOs
 
     funDigitalWrite(BUS_ENABLE, FUN_LOW); // Set BUS_ENABLE to low
-    pin_init(); // Initialize pins
+    pin_init(); // Initialize extended databus pins
+    
     int testaddr = 0x1234; // Example address to write
     write_addressbus(testaddr); // Write the address to the address bus
 }
@@ -65,7 +66,7 @@ int read_databus() {
     databus_val = ((port_c & c_mask) >> 15) | ((port_a & a_mask) >> 7); // Combine the values from port A and port C
     return databus_val; // Return the combined data from the data bus
 }
-// >> bitshift right, << bitshift left
+
 void write_addressbus(int address) {
     int flipped_addr = ((address & 0x1F) << 11) | ((address & 0xFFE0) << 15); // flip and shift address bits to match wiring
     GPIOA->OUTDR = (GPIOA->OUTDR & 0xF803FF) | flipped_addr; // set only the address bits in the GPIOA output data register
