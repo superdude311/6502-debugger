@@ -72,5 +72,5 @@ int read_databus() { // reads the data bus (PC15, PA8 to PA14)
 
 void write_addressbus(int address) {
     int flipped_addr = ((address & 0x1FF) << 15) | ((address & 0xFE00) >> 9); // flip and shift address bits to match wiring
-    GPIOA->OUTDR = (GPIOA->OUTDR & 0xFF807F) | flipped_addr; // set only the address bits in the GPIOA output data register
+    GPIOA->OUTDR = (GPIOA->OUTDR & ~0xFF807F) | flipped_addr; // set only the address bits in the GPIOA output data register
 }
